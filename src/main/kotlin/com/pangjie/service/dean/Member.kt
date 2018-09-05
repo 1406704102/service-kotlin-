@@ -14,5 +14,6 @@ data class Member(
         val name: String,
         val phone: String,
         val integral: Int,
-        val createTime: Date = Date()
+        val createTime: Date = Date(),
+        val isDelete: Int = 0
 )
