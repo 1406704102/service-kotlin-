@@ -14,4 +14,5 @@ interface MemberRepo : CrudRepository<Member, Long> {
     fun findMemberByName(name: String): MutableIterable<Member>
     fun findMemberByPhone(phone: String): MutableIterable<Member>
     fun findMemberByIntegral(integral: Int): MutableIterable<Member>
+    fun findMemberById(id:Long):Member
 }
