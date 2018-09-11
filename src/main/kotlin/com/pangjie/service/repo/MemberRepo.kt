@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 interface MemberRepo : CrudRepository<Member, Long> {
     fun findMemberByIsDelete(isDelete: Int, pageable: Pageable): Slice<Member>
+    fun findMemberByIsDelete(isDelete: Int): MutableIterable<Member>
     fun findMemberByIsDeleteAndName(isDelete: Int, name: String): MutableIterable<Member>
     fun findMemberByName(name: String): MutableIterable<Member>
     fun findMemberByPhone(phone: String): MutableIterable<Member>

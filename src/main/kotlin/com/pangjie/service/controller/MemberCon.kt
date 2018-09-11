@@ -88,4 +88,14 @@ class MemberCon(val memberRepo: MemberRepo) {
         }
         return v!!
     }
+
+    /**
+     * 功能描述:查询有多少会员
+     * No such property: code for class: Script1
+     * @return:
+     * @Author: pangjie
+     * @Date: 2018/9/11 0011 11:33
+     */
+    @RequestMapping("total")
+    fun findMemberTotal() = memberRepo.findMemberByIsDelete(0).count()
 }
