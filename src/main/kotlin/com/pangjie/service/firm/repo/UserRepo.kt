@@ -1,6 +1,6 @@
-package com.pangjie.service.repo
+package com.pangjie.service.firm.repo
 
-import com.pangjie.service.dean.User
+import com.pangjie.service.firm.bean.User
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
 

@@ -1,7 +1,7 @@
-package com.pangjie.service.controller
+package com.pangjie.service.firm.controller
 
-import com.pangjie.service.dean.Member
-import com.pangjie.service.repo.MemberRepo
+import com.pangjie.service.firm.bean.Member
+import com.pangjie.service.firm.repo.MemberRepo
 import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
 

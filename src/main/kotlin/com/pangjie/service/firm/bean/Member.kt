@@ -1,4 +1,4 @@
-package com.pangjie.service.dean
+package com.pangjie.service.firm.bean
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.*

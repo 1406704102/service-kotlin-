@@ -1,6 +1,6 @@
-package com.pangjie.service.repo
+package com.pangjie.service.firm.repo
 
-import com.pangjie.service.dean.Member
+import com.pangjie.service.firm.bean.Member
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.Slice
 import org.springframework.data.repository.CrudRepository
