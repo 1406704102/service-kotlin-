@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/menu")
-class MenuCon(val menuRepo: MenuRepo){
+class MenuCon(val menuRepo: MenuRepo) {
 
     /**
      * 功能描述: 查询菜单(排序)
@@ -18,7 +18,23 @@ class MenuCon(val menuRepo: MenuRepo){
      * @Date: 2018/9/21 0021 14:55
      */
     @RequestMapping("findAll")
-    fun findAll():MutableIterable<Menu> {
+    fun findAll(): MutableIterable<Menu> {
         return menuRepo.findAll(Sort(Sort.Direction.ASC, "sortNum"))
+    }
+
+    /**
+     * @description TODO:根据层级查询菜单
+     * @author pangjie___
+     * @date 2018/9/25 0025
+     * @return
+     **/
+    @RequestMapping("findMenu")
+    fun findByHasSub(level: String): MutableIterable<Menu> {
+        return menuRepo.findByLevelOrderBySortNumAsc(level)
+    }
+
+    @RequestMapping("findMenuById")
+    fun findByHasSub(level: String, subs: String): MutableIterable<Menu> {
+        return menuRepo.findByLevelAndSubsOrderBySortNumAsc(level, subs)
     }
 }

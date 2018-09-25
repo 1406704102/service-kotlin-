@@ -9,4 +9,6 @@ import org.springframework.stereotype.Service
 @Service
 interface MenuRepo : CrudRepository<Menu, Long> {
     fun findAll(sort: Sort): MutableIterable<Menu>
+    fun findByLevelOrderBySortNumAsc(level:String):MutableIterable<Menu>
+    fun findByLevelAndSubsOrderBySortNumAsc(level:String,subs:String):MutableIterable<Menu>
 }

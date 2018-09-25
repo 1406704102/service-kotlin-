@@ -17,7 +17,12 @@ data class Menu(
         val icon: String,
         val identification: String,
         val name: String,
-        val sortNum:Int,
-        val subs:String,
-        val hasSub:String
+        //菜单序号
+        val sortNum: Int,
+        //上级菜单的id
+        val subs: String,
+        //是否有下级菜单
+        val hasSub: String,
+        //菜单等级
+        val level: String
 )
