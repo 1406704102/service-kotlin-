@@ -20,7 +20,7 @@ data class Menu(
         //菜单序号
         val sortNum: Int,
         //上级菜单的id
-        val subs: String,
+        var subs: String,
         //是否有下级菜单
         val hasSub: String,
         //菜单等级

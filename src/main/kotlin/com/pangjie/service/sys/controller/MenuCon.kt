@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/menu")
 class MenuCon(val menuRepo: MenuRepo) {
 
-    /**
+    /**menu
      * 功能描述: 查询菜单(排序)
      * No such property: code for class: Script1
      * @return:
