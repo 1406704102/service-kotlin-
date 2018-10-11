@@ -8,6 +8,6 @@ data class User(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long,
         val userName: String,
-        val passWord: String
-
+        val passWord: String,
+        val role:String
 )

@@ -1,5 +1,6 @@
 package com.pangjie.service.sys.controller
 
+import com.pangjie.service.firm.repo.UserRepo
 import com.pangjie.service.sys.bean.Menu
 import com.pangjie.service.sys.repo.MenuRepo
 import org.springframework.data.domain.Sort
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/menu")
-class MenuCon(val menuRepo: MenuRepo) {
+class MenuCon(val menuRepo: MenuRepo,val userRepo: UserRepo) {
 
     /**menu
      * 功能描述: 查询菜单(排序)
@@ -23,18 +24,17 @@ class MenuCon(val menuRepo: MenuRepo) {
     }
 
     /**
-     * @description TODO:根据层级查询菜单
+     * @description TODO:根据层级,和用户的权限查询菜单
      * @author pangjie___
      * @date 2018/9/25 0025
      * @return
      **/
     @RequestMapping("findMenu")
-    fun findByHasSub(level: String): MutableIterable<Menu> {
-        return menuRepo.findByLevelOrderBySortNumAsc(level)
-    }
-
-    @RequestMapping("findMenuById")
-    fun findByHasSub(level: String, subs: String): MutableIterable<Menu> {
-        return menuRepo.findByLevelAndSubsOrderBySortNumAsc(level, subs)
+    fun findByHasSub(level: String, userId: Long): MutableIterable<Menu> {
+        var ids = mutableListOf<Long>()
+        userRepo.findUserById(userId).role.split(',').forEach {
+            ids.add(it.toLong())
+        }
+        return menuRepo.findByLevelAndIdInOrderBySortNumAsc(level, ids)
     }
 }

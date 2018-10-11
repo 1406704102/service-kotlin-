@@ -14,7 +14,9 @@ class UserCon(val userRepo: UserRepo) {
     fun findById(id: Long) = userRepo.findUserById(id)
 
     @RequestMapping("findByName")
-    fun findByName(userName: String) = userRepo.findUserByUserName(userName)
+    fun findByName(userName: String): Long {
+        return userRepo.findUserByUserName(userName).id
+    }
 
     @RequestMapping("addUser")
     @ResponseBody
