@@ -22,4 +22,9 @@ class UserCon(val userRepo: UserRepo) {
     @ResponseBody
     fun addUser(@RequestBody user: User) = userRepo.save(user)
 
+    @RequestMapping("deleteUser")
+    fun deleteUser(id:Long)=userRepo.delete(userRepo.findUserById(id))
+
+    @RequestMapping("updateUser")
+    fun updateUser(user: User) = userRepo.save(user)
 }
