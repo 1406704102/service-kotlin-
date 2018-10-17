@@ -37,4 +37,13 @@ class MenuCon(val menuRepo: MenuRepo,val userRepo: UserRepo) {
         }
         return menuRepo.findByLevelAndIdInOrderBySortNumAsc(level, ids)
     }
+
+    /**
+    * @description TODO:
+    * @author pangjie___
+    * @date 2018/10/17 0017
+    * @return 
+    **/ 
+    @RequestMapping("findByLevel")
+    fun findByLevel(level: String)=menuRepo.findByLevelOrderBySortNumAsc(level)
 }

@@ -9,5 +9,5 @@ data class User(
         val id: Long,
         val userName: String,
         val passWord: String,
-        val role:String
+        var role:String
 )

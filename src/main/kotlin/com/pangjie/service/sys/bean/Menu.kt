@@ -1,6 +1,7 @@
 package com.pangjie.service.sys.bean
 
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 /**
  * 功能描述: 菜单
@@ -16,7 +17,7 @@ data class Menu(
         val id: Long,
         val icon: String,
         val identification: String,
-        val name: String,
+        val label: String,
         //菜单序号
         val sortNum: Int,
         //上级菜单的id
@@ -24,5 +25,8 @@ data class Menu(
         //是否有下级菜单
         val hasSub: String,
         //菜单等级
-        val level: String
+        val level: String,
+        //下级菜单
+        @Transient
+        val children: String
 )

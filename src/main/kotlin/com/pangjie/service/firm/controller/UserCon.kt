@@ -27,4 +27,17 @@ class UserCon(val userRepo: UserRepo) {
 
     @RequestMapping("updateUser")
     fun updateUser(user: User) = userRepo.save(user)
+
+    /**
+    * @description TODO:根据id修改用户权限
+    * @author pangjie___
+    * @date 2018/10/17 0017
+    * @return
+    **/
+    @RequestMapping("updateRole")
+    fun updateRole(id: Long,role:String){
+        val user = userRepo.findUserById(id)
+        user.role = role
+        userRepo.save(user)
+    }
 }
