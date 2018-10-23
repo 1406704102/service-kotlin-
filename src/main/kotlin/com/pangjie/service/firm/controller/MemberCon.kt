@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/MemberCon")
+@RequestMapping("/api/MemberCon")
 class MemberCon(val memberRepo: MemberRepo) {
 
     /**

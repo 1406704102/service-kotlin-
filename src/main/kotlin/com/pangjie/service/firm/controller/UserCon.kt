@@ -5,7 +5,7 @@ import com.pangjie.service.firm.repo.UserRepo
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/UserCon")
+@RequestMapping("/api/UserCon")
 class UserCon(val userRepo: UserRepo) {
     @RequestMapping("findAll")
     fun findAll(): MutableIterable<User> = userRepo.findAll()

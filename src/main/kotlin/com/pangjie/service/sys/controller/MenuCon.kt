@@ -18,7 +18,7 @@ class MenuCon(val menuRepo: MenuRepo,val userRepo: UserRepo) {
      * @Author: pangjie
      * @Date: 2018/9/21 0021 14:55
      */
-    @RequestMapping("findAll")
+    @RequestMapping("/api/findAll")
     fun findAll(): MutableIterable<Menu> {
         return menuRepo.findAll(Sort(Sort.Direction.ASC, "sortNum"))
     }
