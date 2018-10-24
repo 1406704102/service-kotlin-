@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/api/menu")
 class MenuCon(val menuRepo: MenuRepo,val userRepo: UserRepo) {
 
     /**menu

@@ -2,7 +2,6 @@ package com.pangjie.service.firm.controller
 
 import com.pangjie.service.firm.bean.Member
 import com.pangjie.service.firm.repo.MemberRepo
-import org.springframework.data.domain.PageRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -17,9 +16,9 @@ class MemberCon(val memberRepo: MemberRepo) {
      * @Date: 2018/9/7 0007 9:44
      */
     @RequestMapping("findAll0")
-    fun findAll0(@RequestParam page: Int, @RequestParam size: Int): MutableIterable<Member> {
-        return memberRepo.findMemberByIsDelete(0, PageRequest.of(page - 1, size))
-    }
+    fun findAll0(@RequestParam page: Int, @RequestParam size: Int): List<Member> {
+        return memberRepo.findMemberByIsDelete(0).sortedBy { it.id }
+}
 
     @RequestMapping("findByIsDeleteAndName")
     fun findMemberByIsDeleteAndName(isDelete: Int, name: String): MutableIterable<Member> = memberRepo.findMemberByIsDeleteAndName(isDelete, name)
