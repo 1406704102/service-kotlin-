@@ -2,11 +2,14 @@ package com.pangjie.service.firm.controller
 
 import com.pangjie.service.firm.bean.Member
 import com.pangjie.service.firm.repo.MemberRepo
+import com.pangjie.service.firm.repo.UserRepo
+//import com.pangjie.service.sys.uitl.getLoginUser
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpSession
 
 @RestController
 @RequestMapping("/api/MemberCon")
-class MemberCon(val memberRepo: MemberRepo) {
+class MemberCon(val memberRepo: MemberRepo, val session: HttpSession,val userRepo: UserRepo) {
 
     /**
      * 功能描述:分页查询会员
@@ -36,7 +39,10 @@ class MemberCon(val memberRepo: MemberRepo) {
     fun findByIntegral(int: Int): MutableIterable<Member> = memberRepo.findMemberByIntegral(int)
 
     @PostMapping("add")
-    fun addMember(member: Member) = memberRepo.save(member)
+    fun addMember(member: Member) {
+        println(userRepo.findUserById(session.getAttribute("id").toString().toLong()).userName)
+        memberRepo.save(member)
+    }
 
     /**
      * 功能描述:修改会员

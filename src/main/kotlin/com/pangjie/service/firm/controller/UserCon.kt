@@ -3,6 +3,7 @@ package com.pangjie.service.firm.controller
 import com.pangjie.service.firm.bean.User
 import com.pangjie.service.firm.repo.UserRepo
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpSession
 
 @RestController
 @RequestMapping("/api/UserCon")
@@ -14,8 +15,10 @@ class UserCon(val userRepo: UserRepo) {
     fun findById(id: Long) = userRepo.findUserById(id)
 
     @RequestMapping("findByName")
-    fun findByName(userName: String): Long {
-        return userRepo.findUserByUserName(userName).id
+    fun findByName(userName: String, session: HttpSession): Long {
+        var userId = userRepo.findUserByUserName(userName).id
+        session.setAttribute("id",userId)
+        return userId
     }
 
     @RequestMapping("addUser")
