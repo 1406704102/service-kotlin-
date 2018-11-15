@@ -11,4 +11,5 @@ interface MenuRepo : CrudRepository<Menu, Long> {
     fun findAll(sort: Sort): MutableIterable<Menu>
     fun findByLevelAndIdInOrderBySortNumAsc(level: String, ids: MutableList<Long>): MutableIterable<Menu>
     fun findByLevelOrderBySortNumAsc(level: String):MutableIterable<Menu>
+    fun findBySubsOrderBySortNum(sub:String):MutableList<Menu>
 }

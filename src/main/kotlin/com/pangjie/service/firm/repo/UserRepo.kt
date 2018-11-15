@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Service
 
 @Service
-interface UserRepo : CrudRepository<User, Long> {
+interface UserRepo : CrudRepository<User, Long>{
     fun findUserById(id: Long): User
     fun findUserByUserName(name: String): User
 }

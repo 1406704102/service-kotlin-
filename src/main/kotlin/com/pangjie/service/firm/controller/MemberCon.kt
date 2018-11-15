@@ -40,7 +40,7 @@ class MemberCon(val memberRepo: MemberRepo, val session: HttpSession,val userRep
 
     @PostMapping("add")
     fun addMember(member: Member) {
-        println(userRepo.findUserById(session.getAttribute("id").toString().toLong()).userName)
+//        println(.userName)
         memberRepo.save(member)
     }
 

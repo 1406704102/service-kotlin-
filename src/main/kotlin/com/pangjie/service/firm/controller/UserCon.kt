@@ -17,7 +17,8 @@ class UserCon(val userRepo: UserRepo) {
     @RequestMapping("findByName")
     fun findByName(userName: String, session: HttpSession): Long {
         var userId = userRepo.findUserByUserName(userName).id
-        session.setAttribute("id",userId)
+        session.setAttribute("id", userId)
+        println(session.getAttribute("id"))
         return userId
     }
 
@@ -26,21 +27,24 @@ class UserCon(val userRepo: UserRepo) {
     fun addUser(@RequestBody user: User) = userRepo.save(user)
 
     @RequestMapping("deleteUser")
-    fun deleteUser(id:Long)=userRepo.delete(userRepo.findUserById(id))
+    fun deleteUser(id: Long) = userRepo.delete(userRepo.findUserById(id))
 
     @RequestMapping("updateUser")
     fun updateUser(user: User) = userRepo.save(user)
 
     /**
-    * @description TODO:根据id修改用户权限
-    * @author pangjie___
-    * @date 2018/10/17 0017
-    * @return
-    **/
+     * @description TODO:根据id修改用户权限
+     * @author pangjie___
+     * @date 2018/10/17 0017
+     * @return
+     **/
     @RequestMapping("updateRole")
-    fun updateRole(id: Long,role:String){
+    fun updateRole(id: Long, role: String) {
         val user = userRepo.findUserById(id)
-        user.role = role
+        if (role[0] !== ',')
+            user.role = role
+        else
+            user.role = role.substring(1)
         userRepo.save(user)
     }
 }

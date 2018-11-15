@@ -28,5 +28,6 @@ data class Menu(
         val level: String,
         //下级菜单
         @Transient
-        val children: String
+        val children: String,
+        val pId: String
 )
