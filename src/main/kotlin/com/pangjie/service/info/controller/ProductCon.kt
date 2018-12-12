@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/ProductCon")
 class ProductCon(val productRepo: ProductRepo) {
 
+    @RequestMapping("getAll")
+    fun getAll() = productRepo.findAll()
+
     @PostMapping("add")
     fun addProduct(product: Product) = productRepo.save(product)
 

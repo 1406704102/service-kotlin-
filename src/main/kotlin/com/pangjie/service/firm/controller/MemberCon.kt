@@ -3,6 +3,7 @@ package com.pangjie.service.firm.controller
 import com.pangjie.service.firm.bean.Member
 import com.pangjie.service.firm.repo.MemberRepo
 import com.pangjie.service.firm.repo.UserRepo
+import org.springframework.data.domain.PageRequest
 //import com.pangjie.service.sys.uitl.getLoginUser
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpSession
@@ -20,7 +21,7 @@ class MemberCon(val memberRepo: MemberRepo, val session: HttpSession,val userRep
      */
     @RequestMapping("findAll0")
     fun findAll0(@RequestParam page: Int, @RequestParam size: Int): List<Member> {
-        return memberRepo.findMemberByIsDelete(0).sortedBy { it.id }
+        return memberRepo.findMemberByIsDelete(0, PageRequest.of(page - 1, size)).sortedBy { it.id }
 }
 
     @RequestMapping("findByIsDeleteAndName")

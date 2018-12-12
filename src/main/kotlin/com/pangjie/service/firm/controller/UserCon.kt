@@ -15,11 +15,15 @@ class UserCon(val userRepo: UserRepo) {
     fun findById(id: Long) = userRepo.findUserById(id)
 
     @RequestMapping("findByName")
-    fun findByName(userName: String, session: HttpSession): Long {
-        var userId = userRepo.findUserByUserName(userName).id
-        session.setAttribute("id", userId)
-        println(session.getAttribute("id"))
-        return userId
+    fun findByName(userName: String, session: HttpSession): Boolean {
+        return try {
+            var userId = userRepo.findUserByUserName(userName).id
+            session.setAttribute("id", userId)
+            println(session.getAttribute("id"))
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 
     @RequestMapping("addUser")

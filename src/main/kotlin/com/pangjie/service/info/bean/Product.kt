@@ -14,8 +14,8 @@ class Product(
         val name: String,
         val img: String,
         val selfCode: String,
-        val description: String,
+        val description: String?,
         //分
-        val price: Int,
+        val price: Int?,
         val addTime: Date
 )

@@ -32,9 +32,9 @@ class MenuCon(val menuRepo: MenuRepo, val userRepo: UserRepo) {
      * @return
      **/
     @RequestMapping("findMenu")
-    fun findByHasSub(level: String, userId: Long): MutableIterable<Menu> {
+    fun findByHasSub(level: String, userName: String): MutableIterable<Menu> {
         var ids = mutableListOf<Long>()
-        userRepo.findUserById(userId).role.split(',').forEach {
+        userRepo.findUserByUserName(userName).role.split(',').forEach {
             ids.add(it.toLong())
         }
         return menuRepo.findByLevelAndIdInOrderBySortNumAsc(level, ids)
