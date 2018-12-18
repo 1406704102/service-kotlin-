@@ -17,5 +17,5 @@ class Product(
         val description: String?,
         //分
         val price: Int?,
-        val addTime: Date
+        val addTime: Date?
 )
