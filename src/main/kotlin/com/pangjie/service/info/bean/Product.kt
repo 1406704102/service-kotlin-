@@ -12,7 +12,7 @@ class Product(
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long,
         val name: String,
-        val img: String,
+        val img: String?,
         val selfCode: String,
         val description: String?,
         //分
