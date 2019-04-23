@@ -1,8 +1,59 @@
 package com.pangjie.service.wow
 
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 import java.io.*
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.io.FileInputStream
+import java.nio.ByteBuffer
+import java.nio.file.Path
 
+
+@RestController
+@RequestMapping("/api/interface")
 class Interface {
+
+
+    @RequestMapping("files")
+    fun files(file: MultipartFile) {
+
+//        val reader = Files.newBufferedReader(files)
+        file.originalFilename!!.split("/").forEach {
+            println(it)
+        }
+/*        val bytes = file.bytes
+        val path = Paths.get("E:\\桌面\\新建文件夹\\"+file.originalFilename)
+
+        //保存在本地
+        Files.write(path, bytes)*/
+        var path = "E:\\桌面\\新建文件夹\\"+file.originalFilename
+        var file2=  File(path)
+        var fileP = file2.parentFile
+        if(!fileP.exists()){
+            fileP.mkdirs();
+        }
+        file2.createNewFile()
+    }
+
+    @RequestMapping("fileList")
+    fun fileList(files: MutableList<MultipartFile>) {
+        files.forEach {
+            println(it.originalFilename)
+            var path = "E:\\桌面\\新建文件夹\\"+it.originalFilename
+            var file2=  File(path)
+            var fileP = file2.parentFile
+            if(!fileP.exists()){
+                fileP.mkdirs();
+            }
+            println(file2.name)
+            file2.createNewFile()
+        }
+    }
+
+    @RequestMapping("test")
+    fun test() { print("-----------------------") }
 }
 
 fun main(args: Array<String>) {
@@ -21,6 +72,19 @@ fun main(args: Array<String>) {
 
     copyFilesTo(File("C:\\Users\\pangjie___\\Desktop\\资源文件夹"), File("C:\\Users\\pangjie___\\Desktop\\目标文件夹"))
 }
+
+/*fun saveFile(file: MultipartFile) {
+    val outputStream = FileOutputStream
+    val channel = outputStream.getChannel()
+    val buffer = ByteBuffer.allocate(1024)
+    val string = "java nio"
+    buffer.put(string.toByteArray())
+    buffer.flip()     //此处必须要调用buffer的flip方法
+    channel.write(buffer)
+    channel.close()
+    outputStream.close()
+}*/
+
 fun copyFilesTo(srcDir: File, destDir: File): Boolean {
     if (!srcDir.isDirectory || !destDir.isDirectory) return false// 判断是否是目录
     if (!destDir.exists()) return false
@@ -43,6 +107,7 @@ fun copyFilesTo(srcDir: File, destDir: File): Boolean {
 
     return true
 }
+
 fun copyFileTo(srcFile: File, destFile: File): Boolean {
     return if (srcFile.isDirectory || destFile.isDirectory) {
         false
