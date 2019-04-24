@@ -1,5 +1,7 @@
-package com.pangjie.service.wow
+package com.pangjie.service.wow.controller
 
+import com.pangjie.service.wow.bean.Interface
+import com.pangjie.service.wow.repo.InterfaceRepo
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
@@ -7,11 +9,25 @@ import java.io.*
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.io.FileInputStream
+import java.util.*
 
 
 @RestController
 @RequestMapping("/api/interface")
-class Interface {
+class InterfaceCon(val interfaceRepo: InterfaceRepo) {
+
+
+    /**
+    * @description TODO:添加插件信息
+    * @author pangjie___
+    * @date 2019/4/24 0024
+    * @return
+    **/
+    @RequestMapping("addInterFace")
+    fun addInterFace(wowInterface :Interface){
+        interfaceRepo.save(wowInterface)
+    }
+
 
     /**
      * @description TODO:保存多文件
