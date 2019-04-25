@@ -18,12 +18,12 @@ data class Interface(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long,
-        val userId: Long,
+        var userId: Long?,
         //所属人姓名
-        val useName: String,
+        var useName: String?,
         //最后上传时间
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-        val lastUpTime: Date = Date(),
+        var lastUpTime: Date?,
         //存储地址
-        val storageAddress: String
+        var storageAddress: String?
 )

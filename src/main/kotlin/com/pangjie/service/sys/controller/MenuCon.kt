@@ -69,4 +69,24 @@ class MenuCon(val menuRepo: MenuRepo, val userRepo: UserRepo) {
 
     @RequestMapping("findBySubs")
     fun findBySubs(sub: String) = menuRepo.findBySubsOrderBySortNum(sub)
+
+    /**
+    * @description TODO:查询是否有下级菜单
+    * @author pangjie___
+    * @date 2019/4/25 0025
+    * @return
+    **/
+    @RequestMapping("findById")
+    fun findById(id: Long): String = menuRepo.findMenuById(id).hasSub
+
+    /**
+    * @description TODO:查询是否有下级菜单
+    * @author pangjie___
+    * @date 2019/4/25 0025
+    * @return
+    **/
+    @RequestMapping("findByHasSub")
+    fun findByHasSub(): List<Long> {
+        return menuRepo.findByHasSub("1").map { it.id }
+    }
 }

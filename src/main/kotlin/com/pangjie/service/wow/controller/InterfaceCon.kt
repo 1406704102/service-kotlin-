@@ -1,5 +1,7 @@
 package com.pangjie.service.wow.controller
 
+import com.pangjie.service.firm.repo.UserRepo
+import com.pangjie.service.sys.controller.BaseCon
 import com.pangjie.service.wow.bean.Interface
 import com.pangjie.service.wow.repo.InterfaceRepo
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,24 +12,58 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.io.FileInputStream
 import java.util.*
+import javax.servlet.http.HttpSession
 
 
 @RestController
 @RequestMapping("/api/interface")
-class InterfaceCon(val interfaceRepo: InterfaceRepo) {
+class InterfaceCon(val interfaceRepo: InterfaceRepo, override val userRepo: UserRepo, session: HttpSession): BaseCon(session, userRepo) {
 
 
     /**
-    * @description TODO:添加插件信息
-    * @author pangjie___
-    * @date 2019/4/24 0024
-    * @return
-    **/
+     * @description TODO:添加插件信息
+     * @author pangjie___
+     * @date 2019/4/24 0024
+     * @return
+     **/
     @RequestMapping("addInterFace")
-    fun addInterFace(wowInterface :Interface){
+    fun addInterFace(files: MutableList<MultipartFile>, session: HttpSession) {
+/*        val attribute = session.getAttribute("id")
+        val userId = attribute as Long*/
+        val user = getUser()
+        var wowInterface: Interface
+        try {
+            wowInterface = interfaceRepo.findByUserId(user.id)
+            wowInterface.lastUpTime = Date()
+        } catch (e: Exception) {
+            wowInterface = Interface(0, user.id, user.userName, Date(), "E:\\桌面\\新建文件夹\\${user.id}")
+        }
+/*        wowInterface.userId = userId
+        wowInterface.useName = userRepo.findUserById(userId).userName
+        wowInterface.storageAddress = "E:\\桌面\\新建文件夹\\${wowInterface.userId}"
+        wowInterface.lastUpTime = Date()*/
+        fileList(files, "E:\\桌面\\新建文件夹\\${user.id}")
         interfaceRepo.save(wowInterface)
     }
 
+    /**
+    * @description TODO:获取当前用户的最后上传时间
+    * @author pangjie___
+    * @date 2019/4/25 0025
+    * @return
+    **/
+    @RequestMapping("getLastUpTime")
+    fun getLastUpTime(session: HttpSession): String {
+        val attribute = session.getAttribute("id")
+        val userId = attribute as Long
+        val i: Interface
+        try {
+            i = interfaceRepo.findByUserId(userId)
+            return i.lastUpTime.toString()
+        } catch (e: Exception) {
+            return "未上传插件!"
+        }
+    }
 
     /**
      * @description TODO:保存多文件
@@ -36,10 +72,10 @@ class InterfaceCon(val interfaceRepo: InterfaceRepo) {
      * @return
      **/
     @RequestMapping("fileList")
-    fun fileList(files: MutableList<MultipartFile>) {
+    fun fileList(files: MutableList<MultipartFile>, address: String) {
         files.forEach {
             val bytes = it.bytes
-            val path = Paths.get("E:\\桌面\\新建文件夹\\${it.originalFilename}")
+            val path = Paths.get("$address\\${it.originalFilename}")
             var file2 = File(path.toString())
             var fileP = file2.parentFile
             //没有文件夹
